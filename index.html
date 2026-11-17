@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Akshay Chougule | Technical Enablement Architect</title>
+  <style>
+    :root {
+      /* Apple Pro Dark Theme Palette */
+      --bg-base: #000000;
+      --bg-surface: #1d1d1f;
+      --bg-surface-elevated: #2d2d2f;
+      
+      --accent-primary: #2997ff; /* Apple Blue */
+      --accent-hover: #0071e3;
+      
+      --text-main: #f5f5f7;
+      --text-muted: #86868b;
+      --text-sub: #6e6e73;
+      
+      --border-color: #424245;
+      
+      /* System fonts (defaults to SF Pro on Apple devices) */
+      --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --font-mono: "SF Mono", "Menlo", "Monaco", "Courier New", monospace;
+      
+      --transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.47059;
+      letter-spacing: -0.022em;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    a { color: var(--accent-primary); text-decoration: none; transition: var(--transition); }
+    a:hover { text-decoration: underline; }
+
+    .container { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+
+    /* Apple-style Global Nav */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      height: 48px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .nav-content { display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+    .logo { font-weight: 600; font-size: 14px; letter-spacing: -0.01em; color: var(--text-main); display: flex; align-items: center; opacity: 0.9; }
+    .nav-links { display: flex; gap: 32px; font-size: 12px; }
+    .nav-links a { color: var(--text-main); opacity: 0.8; text-decoration: none; }
+    .nav-links a:hover { opacity: 1; }
+
+    /* Buttons */
+    .btn-primary {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--text-main); color: var(--bg-base);
+      font-weight: 600; padding: 12px 24px; border-radius: 980px;
+      font-size: 14px; transition: var(--transition); border: none; cursor: pointer;
+    }
+    .btn-primary:hover { background: #ffffff; transform: scale(1.02); text-decoration: none; }
+    
+    .btn-secondary {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: transparent; color: var(--text-main);
+      font-weight: 400; padding: 12px 24px; border-radius: 980px;
+      font-size: 14px; transition: var(--transition); border: 1px solid var(--text-main);
+    }
+    .btn-secondary:hover { background: var(--text-main); color: var(--bg-base); }
+
+    /* Hero Section */
+    .hero { padding: 120px 0 80px; text-align: center; }
+    .hero-pretitle {
+      font-size: 14px; font-weight: 600; color: #ff6b00; /* Subtle pop of color */
+      text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; display: block;
+    }
+    .hero h1 { 
+      font-size: 64px; font-weight: 600; line-height: 1.05; letter-spacing: -0.04em; 
+      margin-bottom: 24px; max-width: 900px; margin-inline: auto;
+    }
+    .hero h1 span.gradient { background: linear-gradient(90deg, #fff, #86868b); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-bio { font-size: 21px; color: var(--text-muted); max-width: 800px; margin: 0 auto 40px; line-height: 1.5; font-weight: 400; letter-spacing: 0.011em; }
+    
+    .hero-contacts {
+      display: flex; flex-wrap: wrap; gap: 24px; margin-bottom: 48px;
+      justify-content: center; font-size: 14px; color: var(--text-muted); font-weight: 500;
+    }
+    .hero-contacts a { color: var(--text-main); }
+    .hero-contacts a:hover { color: var(--accent-primary); }
+
+    .hero-actions { display: flex; gap: 16px; justify-content: center; margin-bottom: 60px; }
+    
+    /* Tech Stack Banner */
+    .tech-stack-banner {
+      display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: center;
+      padding-top: 40px;
+    }
+    .tech-label { font-size: 12px; color: var(--text-sub); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; width: 100%; text-align: center; margin-bottom: 8px; }
+    .tech-pill {
+      background: var(--bg-surface);
+      padding: 8px 16px; border-radius: 980px; font-size: 14px; font-weight: 500; color: var(--text-muted);
+      transition: var(--transition);
+    }
+    .tech-pill.ai-pill { background: #2d2d2f; color: #fff; }
+
+    /* Stats Grid */
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 24px; margin: 0 0 120px; }
+    .stat-card {
+      background: var(--bg-surface); padding: 40px 32px; border-radius: 24px; text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .stat-card:hover { transform: scale(1.02); }
+    .stat-val { font-size: 48px; font-weight: 600; color: var(--text-main); line-height: 1.1; margin-bottom: 8px; letter-spacing: -0.02em; }
+    .stat-label { font-size: 16px; color: var(--text-muted); font-weight: 500; line-height: 1.3; }
+    .stat-card:nth-child(2) .stat-val { background: linear-gradient(90deg, #ff9345, #ff318c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .stat-card:nth-child(3) .stat-val { background: linear-gradient(90deg, #2997ff, #14ffca); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+    /* Section Headers */
+    .section-header { margin-bottom: 56px; text-align: center; }
+    .section-title { font-size: 48px; font-weight: 600; letter-spacing: -0.03em; margin-bottom: 16px; line-height: 1.1; }
+    .section-subtitle { font-size: 21px; color: var(--text-muted); max-width: 600px; margin: 0 auto; line-height: 1.4; }
+    .nda-footnote { display: block; margin-top: 16px; font-size: 12px; color: var(--text-sub); }
+
+    /* Segmented Control (Tabs) */
+    .tabs-container { margin-bottom: 120px; }
+    .tabs-header { 
+      display: flex; justify-content: center; gap: 4px;
+      background: var(--bg-surface); padding: 4px; border-radius: 98px; 
+      margin: 0 auto 56px; max-width: max-content;
+    }
+    .tab-btn {
+      background: transparent; border: none; padding: 10px 24px;
+      font-family: var(--font-sans); font-size: 14px; font-weight: 500;
+      color: var(--text-muted); cursor: pointer; transition: var(--transition);
+      border-radius: 98px; white-space: nowrap;
+    }
+    .tab-btn:hover { color: var(--text-main); }
+    .tab-btn.active { background: #424245; color: var(--text-main); }
+
+    .tab-content { display: none; animation: fade 0.4s ease forwards; opacity: 0; }
+    .tab-content.active { display: block; }
+    @keyframes fade { to { opacity: 1; } }
+
+    /* Case Study Layout */
+    .cs-main { background: var(--bg-surface); padding: 64px; border-radius: 32px; margin-bottom: 32px; }
+    .cs-title { font-size: 32px; font-weight: 600; margin-bottom: 16px; color: #fff; letter-spacing: -0.02em; line-height: 1.1; text-align: center; }
+    .cs-desc { color: var(--text-muted); font-size: 19px; margin-bottom: 48px; line-height: 1.5; text-align: center; max-width: 700px; margin-inline: auto; }
+    
+    .meta-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 32px 0; margin-bottom: 48px; }
+    .meta-label { font-size: 12px; color: var(--text-sub); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; font-weight: 600; }
+    .meta-value { font-size: 16px; font-weight: 500; color: var(--text-main); }
+    @media (max-width: 768px) { .meta-grid { grid-template-columns: 1fr 1fr; } }
+
+    .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-bottom: 64px; }
+    @media (max-width: 768px) { .content-grid { grid-template-columns: 1fr; gap: 32px; } }
+
+    h4.block-title { font-size: 24px; font-weight: 600; color: #fff; margin-bottom: 16px; letter-spacing: -0.01em; }
+    p.block-text { color: var(--text-muted); margin-bottom: 24px; font-size: 16px; line-height: 1.6; }
+    ul.block-list { color: var(--text-muted); font-size: 16px; line-height: 1.8; padding-left: 20px; }
+    
+    /* Interactive Artifacts */
+    .artifact-box { 
+      background: var(--bg-base); border-radius: 24px; padding: 40px; margin: 40px 0;
+      border: 1px solid var(--border-color);
+    }
+    .artifact-header { 
+      font-size: 12px; color: var(--text-sub); font-weight: 600;
+      border-bottom: 1px solid var(--border-color); padding-bottom: 16px; margin-bottom: 32px; 
+      display: flex; justify-content: space-between; text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    
+    /* Diagram Tiers */
+    .tier-stack { display: flex; flex-direction: column; gap: 16px; }
+    .tier {
+      background: var(--bg-surface); padding: 24px; border-radius: 16px; cursor: default; transition: var(--transition);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .tier:hover { background: var(--bg-surface-elevated); transform: scale(1.01); }
+    .tier-content { display: flex; flex-direction: column; gap: 6px; }
+    .tier-title { font-weight: 600; font-size: 18px; color: #fff; letter-spacing: -0.01em; }
+    .tier-desc { font-size: 14px; color: var(--text-muted); }
+    .tier-tag { 
+      font-size: 12px; padding: 6px 12px; border-radius: 980px; 
+      background: var(--border-color); color: var(--text-main); font-weight: 500;
+    }
+    
+    /* Tables */
+    .table-wrapper { overflow-x: auto; border-radius: 16px; background: var(--bg-surface); }
+    table { width: 100%; border-collapse: collapse; text-align: left; font-size: 14px; }
+    th { background: var(--bg-surface-elevated); color: #fff; padding: 16px 20px; font-weight: 600; border-bottom: 1px solid var(--border-color); }
+    td { padding: 16px 20px; border-bottom: 1px solid var(--border-color); color: var(--text-muted); }
+    tr:last-child td { border-bottom: none; }
+    code { font-family: var(--font-mono); font-size: 13px; background: var(--border-color); color: var(--text-main); padding: 2px 6px; border-radius: 6px; }
+    
+    /* Assessment Box */
+    .assessment-box { 
+      background: var(--bg-surface-elevated); border-radius: 24px; padding: 40px; text-align: center;
+    }
+    .assessment-box h5 { color: #fff; font-size: 21px; margin-bottom: 16px; font-weight: 600; }
+    .assessment-box p { font-size: 16px; color: var(--text-muted); margin-bottom: 16px; max-width: 700px; margin-inline: auto; }
+    .assessment-box p.feedback { color: var(--accent-primary); font-weight: 500; }
+
+    /* Footer */
+    footer { border-top: 1px solid var(--border-color); padding: 60px 0; text-align: center; color: var(--text-sub); font-size: 12px; margin-top: 100px; }
+    footer p.bold { color: var(--text-muted); font-weight: 600; margin-bottom: 8px; font-size: 14px; }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 40px; }
+      .cs-main { padding: 32px 24px; }
+      .artifact-box, .assessment-box { padding: 24px; }
+      .tier { flex-direction: column; align-items: flex-start; gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <div class="nav-content">
+      <div class="logo">Akshay Chougule</div>
+      <div class="nav-links">
+        <a href="#projects">Work Samples</a>
+        <a href="https://www.linkedin.com/in/chouguleakshay/" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero" id="about">
+    <div class="container">
+      <span class="hero-pretitle">Academy Engineer & Instructional Designer</span>
+      <h1><span class="gradient">Bridging complex engineering</span> <br>with human performance.</h1>
+      <p class="hero-bio">
+        8+ years of experience designing and scaling technical enablement solutions across SaaS, Industrial Data Platforms, and AI ecosystems. Drawing on foundational experience from Greenway Health, Livspace, and upGrad, I specialize in deconstructing complex APIs, graph data models, and developer workflows into structured, high-retention onboarding programs—accelerated by AI.
+      </p>
+      
+      <div class="hero-contacts">
+        <span>Bengaluru, India</span>
+        <span>•</span>
+        <span><a href="mailto:akshaychougule581@gmail.com">akshaychougule581@gmail.com</a></span>
+        <span>•</span>
+        <span>+91 8088767260</span>
+      </div>
+      
+      <div class="hero-actions">
+        <a href="#projects" class="btn-primary">Explore Case Studies</a>
+        <button onclick="copyEmail(this)" class="btn-secondary" style="font-family: inherit;">Copy Email</button>
+      </div>
+
+      <div class="tech-stack-banner">
+        <span class="tech-label">Core Stack & AI Tools</span>
+        <span class="tech-pill">Articulate 360</span>
+        <span class="tech-pill">Camtasia</span>
+        <span class="tech-pill ai-pill">Anthropic Claude</span>
+        <span class="tech-pill ai-pill">Google Gemini</span>
+        <span class="tech-pill ai-pill">Synthesia AI</span>
+        <span class="tech-pill">REST APIs & GraphQL</span>
+        <span class="tech-pill">Graph Data Models</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Stats -->
+  <section class="container">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-val">8+</div>
+        <div class="stat-label">Years SaaS Enablement</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">30%</div>
+        <div class="stat-label">Faster Content Dev via AI</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">40%+</div>
+        <div class="stat-label">Hands-On Lab Engagement</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">Scaled</div>
+        <div class="stat-label">Reduced SME Mentoring</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects (Tabs) -->
+  <section class="container" id="projects">
+    <div class="section-header">
+      <h2 class="section-title">Enablement Architectures.</h2>
+      <p class="section-subtitle">Deep dives into end-to-end curriculum systems.</p>
+      <span class="nda-footnote">*Proprietary data abstracted for confidentiality.</span>
+    </div>
+
+    <div class="tabs-container">
+      <div class="tabs-header">
+        <button class="tab-btn active" onclick="openTab('tab1')">Platform Onboarding</button>
+        <button class="tab-btn" onclick="openTab('tab2')">Data Modeling & Agents</button>
+        <button class="tab-btn" onclick="openTab('tab3')">API & BI Integration</button>
+      </div>
+
+      <!-- TAB 1: Platform Onboarding -->
+      <div id="tab1" class="tab-content active">
+        <div class="cs-main">
+          <h3 class="cs-title">Industrial Data Platform Essentials</h3>
+          <p class="cs-desc">Architected an accelerated industrial AI data convergence onboarding pathway for cross-functional enterprise technical roles.</p>
+          
+          <div class="meta-grid">
+            <div><div class="meta-label">Role</div><div class="meta-value">Lead ID & Architect</div></div>
+            <div><div class="meta-label">Scale</div><div class="meta-value">5 Courses | 29 Units</div></div>
+            <div><div class="meta-label">AI Accelerators</div><div class="meta-value">Synthesia, Claude</div></div>
+            <div><div class="meta-label">Format</div><div class="meta-value">3–5m Micro-Lessons</div></div>
+          </div>
+
+          <div class="content-grid">
+            <div>
+              <h4 class="block-title">The Enablement Gap</h4>
+              <p class="block-text">Heavy enterprise operations suffer from decision latency due to disconnected silos across IT (ERP), OT (SCADA), and ET (3D CAD). Technical personnel waste 70% of troubleshooting time cross-referencing isolated tools because traditional cloud warehouses fail to capture physical asset relationships.</p>
+            </div>
+            <div>
+              <h4 class="block-title">Instructional Strategy & AI</h4>
+              <p class="block-text">I structured a 5-course micro-learning pathway, scaffolding the architecture lexicon (spaces, containers, views, nodes, edges) before advancing to data liberation. To scale delivery, I utilized <strong>Synthesia AI</strong> to generate localized, professional video micro-lessons, dramatically reducing studio dependencies.</p>
+            </div>
+          </div>
+
+          <div class="artifact-box">
+            <div class="artifact-header">
+              <span>Artifact: 5-Layer Stack Storyboard</span>
+              <span>Format: Progressive Disclosure</span>
+            </div>
+            <div class="tier-stack">
+              <div class="tier">
+                <div class="tier-content">
+                  <div class="tier-title">Layer 5: Action Layer (Visual Canvas, Analytics, Workflows)</div>
+                  <div class="tier-desc">Collaborative workspaces triggering automated work packages and field alerts.</div>
+                </div>
+                <div class="tier-tag">Automation</div>
+              </div>
+              <div class="tier">
+                <div class="tier-content">
+                  <div class="tier-title">Layer 4: Agentic Reasoning (AI Workbench)</div>
+                  <div class="tier-desc">Grounded AI reasoning over live operational telemetry and engineering diagrams.</div>
+                </div>
+                <div class="tier-tag">Generative AI</div>
+              </div>
+              <div class="tier">
+                <div class="tier-content">
+                  <div class="tier-title">Layer 3: Core Context Layer (Knowledge Graph)</div>
+                  <div class="tier-desc">The relationship engine mapping raw machine telemetry tags to physical equipment.</div>
+                </div>
+                <div class="tier-tag">Data Modeling</div>
+              </div>
+              <div class="tier">
+                <div class="tier-content">
+                  <div class="tier-title">Layer 2: Secure Ingestion (Extractors & Staging)</div>
+                  <div class="tier-desc">Native extractors pulling read-only data streams into staging without disruption.</div>
+                </div>
+                <div class="tier-tag">Pipelines</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="assessment-box">
+            <h5>Targeted Assessment Design Sample</h5>
+            <p><strong>Scenario:</strong> A plant technician detects a vibration alarm on <code>PUMP-101A</code>, but the field telemetry tag is a legacy ID and the ERP shows no open work order. Which layer bridges this gap?</p>
+            <p class="feedback">Feedback Path: Layer 3 (Knowledge Graph) uses automated contextualization to link the raw telemetry directly to asset node PUMP-101A and historical tickets.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: Supply Chain Data Modeling -->
+      <div id="tab2" class="tab-content">
+        <div class="cs-main">
+          <h3 class="cs-title">Enterprise Supply Chain Data Modeling</h3>
+          <p class="cs-desc">Synthesized 10+ hours of raw Subject Matter Expert (SME) architecture deep dives into a standardized, developer-grade curriculum focused on graph deployment.</p>
+          
+          <div class="meta-grid">
+            <div><div class="meta-label">Role</div><div class="meta-value">Technical Enablement</div></div>
+            <div><div class="meta-label">Scale</div><div class="meta-value">21 Lessons | 5 Labs</div></div>
+            <div><div class="meta-label">AI Accelerators</div><div class="meta-value">Gemini, Claude</div></div>
+            <div><div class="meta-label">Lab Engagement</div><div class="meta-value">145 Mins (42%)</div></div>
+          </div>
+
+          <div class="content-grid">
+            <div>
+              <h4 class="block-title">The Engineering Challenge</h4>
+              <p class="block-text">Engineers faced high cognitive hurdles deploying complex supply-chain graph architectures: configuring multi-domain governance, implementing Strongly Typed Hierarchies without circular schema dependencies, and deploying custom AI agent skills in live production environments.</p>
+            </div>
+            <div>
+              <h4 class="block-title">Theory to Sandbox Blueprint</h4>
+              <p class="block-text">I utilized advanced LLMs (<strong>Google Gemini</strong> & <strong>Anthropic Claude</strong>) to rapidly ingest, synthesize, and structure dense engineering transcripts. I dedicated over 40% of the total curriculum to hands-on developer sandboxes, eliminating the dependency on senior architects for 1-on-1 handholding.</p>
+            </div>
+          </div>
+
+          <div class="artifact-box">
+            <div class="artifact-header">
+              <span>Artifact: Data Model Edge Architecture Decision Matrix</span>
+              <span>Format: Engineer Deployment Job Aid</span>
+            </div>
+            <div class="table-wrapper">
+              <table>
+                <tr><th>Edge Type</th><th>Source Domain</th><th>Target Domain</th><th>Implementation Logic</th></tr>
+                <tr><td><code>ReservedForOrder</code></td><td>Finished Goods</td><td>Sales/Fulfillment</td><td>Allocates physical batches to ERP POs.</td></tr>
+                <tr><td><code>SuppliesMaterial</code></td><td>External Vendor</td><td>Raw Materials</td><td>Maps procurement streams to schedules.</td></tr>
+                <tr><td><code>UsesComponent</code></td><td>Plant Equipment</td><td>Sub-Assembly</td><td>Defines BOM consumption trees.</td></tr>
+                <tr><td><code>TransportationLane</code></td><td>Distribution Hub</td><td>Regional Hub</td><td>Models logistics constraints and transit routes.</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: Power BI API Integration -->
+      <div id="tab3" class="tab-content">
+        <div class="cs-main">
+          <h3 class="cs-title">Enterprise Data to Power BI API Integration</h3>
+          <p class="cs-desc">Architected a technical lab-driven course for BI engineers teaching how to route complex graph data models into Power BI via REST, OData, and GraphQL APIs.</p>
+          
+          <div class="meta-grid">
+            <div><div class="meta-label">Role</div><div class="meta-value">Lead ID / API Enablement</div></div>
+            <div><div class="meta-label">Scale</div><div class="meta-value">2 Courses (Core + Migration)</div></div>
+            <div><div class="meta-label">Seat Time</div><div class="meta-value">2h 50m</div></div>
+            <div><div class="meta-label">Audience</div><div class="meta-value">BI Engineers, Data Analysts</div></div>
+          </div>
+
+          <div class="content-grid">
+            <div>
+              <h4 class="block-title">The Data Consumer Gap</h4>
+              <p class="block-text">BI developers struggled to connect multi-dimensional industrial time-series and graph asset relationships into standard Power BI tabular formats. Previous reliance on deprecated asset-centric APIs caused performance bottlenecks and security governance gaps.</p>
+            </div>
+            <div>
+              <h4 class="block-title">Labs-with-Checkpoints Strategy</h4>
+              <p class="block-text">Built an applied sequence where learners build a live "Pump Reliability Report" step-by-step. The curriculum teaches fundamental translation (how a graph 'view' becomes a table), followed by guided sandboxes for authenticating Azure Entra ID and executing REST API connectors.</p>
+            </div>
+          </div>
+
+          <div class="artifact-box">
+            <div class="artifact-header">
+              <span>Artifact: API Connector Routing Decision Matrix</span>
+              <span>Format: Interactive Decision Tree</span>
+            </div>
+            <div class="tier-stack">
+              <div class="tier">
+                <div class="tier-content">
+                  <div class="tier-title">REST API Connector (Target standard)</div>
+                  <div class="tier-desc">Used for all new reports leveraging Core Data Models; requires setting <code>apiVersion 20230821</code> to avoid deprecated endpoints.</div>
+                </div>
+                <div class="tier-tag">Primary</div>
+              </div>
+              <div class="tier">
+                <div class="tier-content">
+                  <div class="tier-title">OData Services (Legacy Migration)</div>
+                  <div class="tier-desc">Maintained only for existing reports; teaches migration paths as legacy asset-centric endpoints approach EOL.</div>
+                </div>
+                <div class="tier-tag">Legacy</div>
+              </div>
+              <div class="tier">
+                <div class="tier-content">
+                  <div class="tier-title">GraphQL (Advanced Querying)</div>
+                  <div class="tier-desc">Utilized when auto-pagination handling and deep hierarchical relation queries are required for complex dashboards.</div>
+                </div>
+                <div class="tier-tag">Advanced</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p class="bold">Akshay Chougule</p>
+      <p>Technical Enablement & Instructional Design Portfolio</p>
+    </div>
+  </footer>
+
+  <script>
+    function copyEmail(btn) {
+      navigator.clipboard.writeText("akshaychougule581@gmail.com").then(() => {
+        const originalText = btn.innerText;
+        btn.innerText = "Email Copied! ✓";
+        btn.style.borderColor = "var(--text-main)";
+        btn.style.backgroundColor = "var(--text-main)";
+        btn.style.color = "var(--bg-base)";
+        setTimeout(() => { 
+          btn.innerText = originalText; 
+          btn.style.backgroundColor = "transparent";
+          btn.style.borderColor = "var(--text-main)";
+          btn.style.color = "var(--text-main)";
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy text: ', err);
+      });
+    }
+    
+    function openTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.currentTarget.classList.add('active');
+    }
+  </script>
+</body>
+</html>
