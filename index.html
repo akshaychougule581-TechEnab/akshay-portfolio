@@ -137,7 +137,7 @@
     /* Segmented Control (Tabs) */
     .tabs-container { margin-bottom: 120px; }
     .tabs-header { 
-      display: flex; justify-content: center; gap: 4px;
+      display: flex; justify-content: center; gap: 4px; flex-wrap: wrap;
       background: var(--bg-surface); padding: 4px; border-radius: 98px; 
       margin: 0 auto 56px; max-width: max-content;
     }
@@ -308,6 +308,7 @@
         <button class="tab-btn active" onclick="openTab('tab1')">Platform Onboarding</button>
         <button class="tab-btn" onclick="openTab('tab2')">Data Modeling & Agents</button>
         <button class="tab-btn" onclick="openTab('tab3')">API & BI Integration</button>
+        <button class="tab-btn" onclick="openTab('tab4')">Supply Chain Fundamentals</button>
       </div>
 
       <!-- TAB 1: Platform Onboarding -->
@@ -476,6 +477,76 @@
           </div>
         </div>
       </div>
+
+      <!-- TAB 4: Supply Chain Fundamentals -->
+      <div id="tab4" class="tab-content">
+        <div class="cs-main">
+          <h3 class="cs-title">Enterprise Supply Chain Fundamentals</h3>
+          <p class="cs-desc">Designed a foundational learning path mapping the business context, scalable data model architecture, and high-performance querying of a supply chain knowledge graph.</p>
+          
+          <div class="meta-grid">
+            <div><div class="meta-label">Role</div><div class="meta-value">Curriculum Architect</div></div>
+            <div><div class="meta-label">Scale</div><div class="meta-value">2 Courses | 8 Lessons</div></div>
+            <div><div class="meta-label">Seat Time</div><div class="meta-value">55 Minutes</div></div>
+            <div><div class="meta-label">Audience</div><div class="meta-value">Solution Architects, Data Engineers</div></div>
+          </div>
+
+          <div class="content-grid">
+            <div>
+              <h4 class="block-title">The Enablement Gap</h4>
+              <p class="block-text">Engineers transitioning to supply chain data models lacked the context bridging OT/IT operational systems with complex supply chain logistics. Before diving into code, they needed a fast, high-level map demonstrating exactly how data layers connect and scale.</p>
+            </div>
+            <div>
+              <h4 class="block-title">Instructional Strategy</h4>
+              <p class="block-text">Segmented the path into "Context & Value" and "Architecture & Validation." Utilizing a top-down cognitive approach, the course moves from solving the business problem (the "hidden wall" dividing production) to enforcing deep technical implementations like SHACL validation and Gherkin test harnesses.</p>
+            </div>
+          </div>
+
+          <div class="artifact-box">
+            <div class="artifact-header">
+              <span>Artifact: Graph Scalability & Validation Matrix</span>
+              <span>Format: Architecture Job Aid</span>
+            </div>
+            <div class="tier-stack">
+              <div class="tier">
+                <div class="tier-content">
+                  <div class="tier-title">Multi-Tree Hierarchies</div>
+                  <div class="tier-desc">Establishing parallel trees for Material & Inventory, Procurement, and Fulfillment domains.</div>
+                </div>
+                <div class="tier-tag">Data Modeling</div>
+              </div>
+              <div class="tier">
+                <div class="tier-content">
+                  <div class="tier-title">Archival via Records & Streams</div>
+                  <div class="tier-desc">Configuring scalability tiering, version capture, and automated purges to keep live queries performant.</div>
+                </div>
+                <div class="tier-tag">Performance</div>
+              </div>
+              <div class="tier">
+                <div class="tier-content">
+                  <div class="tier-title">Agentic Workflows</div>
+                  <div class="tier-desc">Deploying pre-built AI agent roles, custom graph query tools, and enforcing token usage reduction.</div>
+                </div>
+                <div class="tier-tag">Intelligence</div>
+              </div>
+              <div class="tier">
+                <div class="tier-content">
+                  <div class="tier-title">Validation Protocols</div>
+                  <div class="tier-desc">Executing Gherkin test specifications and SHACL quality rules before pushing schema extensions.</div>
+                </div>
+                <div class="tier-tag">Testing</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="assessment-box">
+            <h5>Targeted Assessment Design Sample</h5>
+            <p><strong>Scenario:</strong> An implementation engineer needs to extend the core supply chain model with a new logistics domain. What validation frameworks must the schema pass before production deployment?</p>
+            <p class="feedback">Feedback Path: The new domain must pass Gherkin test specifications and SHACL quality rules to ensure graph integrity and prevent circular schema dependencies.</p>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
